@@ -17,13 +17,14 @@ public class OrderTextUpdateStategy implements OrderStrategy {
 
         SendMessage sendMessage = new SendMessage();
 
-        sendMessage.setText(chatId);
+        sendMessage.setChatId(chatId);
 
         sendMessage.setText("Invalid response entered. Please input the order number or tap /start to start over.");
 
         String textUpdate = update.getMessage().getText().trim();
 
         if (OrderDetailsDAOImpl.orders.containsKey(textUpdate)){
+
             sendMessage.setText(OrderDetailsDAOImpl.orders.get(textUpdate).toString());
         }
 
@@ -32,6 +33,8 @@ public class OrderTextUpdateStategy implements OrderStrategy {
             //MongoDB.updateField(MongoDB.STATE, State.GENERAL.toString(),chatId);
             sendMessage = new GeneralTextUpdateStrategy().getResponse(update);
         }
+
+        MongoDB.updateField(MongoDB.STATE,State.GENERAL.toString(),chatId);
 
         return sendMessage;
     }

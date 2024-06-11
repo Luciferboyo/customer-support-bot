@@ -12,17 +12,17 @@ import java.util.List;
 
 public class GeneralTextUpdateStrategy implements GeneralStrategy {
 
-    public static String sendText = "Sorry,your command is incorrect.you can enter \"/start\" to start ordering";
-
     @Override
     public SendMessage getResponse(Update update) {
+
+        String sendText = "Sorry,your command is incorrect, you can enter \"/start\" to start ordering";
 
         String chatId = String.valueOf(update.getMessage().getChatId());
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
 
-        if (update.getMessage().hasText()){
+        if (update.getMessage().hasText() && "/start".equalsIgnoreCase(update.getMessage().getText())){
 
             sendText = "Welcome to HelloWorld,please select the option you are looking for.";
 

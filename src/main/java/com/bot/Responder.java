@@ -32,6 +32,7 @@ public class Responder extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
 
+
         try {
 
             SendMessage response = null;
